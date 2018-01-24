@@ -4,27 +4,131 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Chat | ChatApp</title>
+  <title>Komunikato 10wpdow</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/jquerycss.css">
+  <link href="fancy.css" rel="stylesheet" type="text/css">
+  
+  <script src="/js/libs/jquery-3.1.0.min.js"></script>  
+  <script src="/js/libs/jqueryui.js"></script>
+  <script src="js/libs/peer.min.js"></script>
+  <script src="js/libs/FileSaver.js"></script>
+  <script src="js/libs/push.min.js"></script>
+
+  
+  
+  <script>
+    $( function() {
+      $( "#camera1" ).resizable();
+    } );
+    $( function() {
+    $( "#camera1" ).draggable();
+
+  } );
+    </script>
+    
 </head>
 
 <body class="chat">
-
+  
+    <audio id="myAudio">
+        <source src="/sound/skype.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <audio id="gg">
+        <source src="/sound/GG.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+ <img style="position:absolute; margin-left:50px" src="/img/logo.png">
+ <div id="pokaKtoDzwoni"class="ukryjKtoDzwoni">
+    <img  src="/img/dzwoni.gif">
+    <div id="ktoDzwoni" class="ktoDzwoni"></div>    
+    <button onclick="odbierz()" style="height:35px; width:95px; background:green; text-align:top" type="button">Odbierz</button>
+    <button onclick="odrzuc()"style="height:35px ; width:95px; background:red" type="button">Odrzuć</button> 
+ </div>
+ <div id="pokaDoKogoDzwoni"class="ukryjKtoDzwoni">
+  <img  src="/img/dzwoni.gif">
+  <div id="doKogoDzwoni" class="ktoDzwoni"></div> 
+  <button onclick="anulujDzwonienie()"style="height:35px ; width:95px; background:red" type="button">Anuluj</button> 
+  
+</div>
   <div class="chat__sidebar">
-    <h3>People</h3>
+    <h3>Podłączeni Użytkownicy</h3>
     <div id="users"></div>
   </div>
 
+  <!-- <button onclick="playAudio()" style="height:50px" type="button">Play Audio</button>
+  <button onclick="pauseAudio()"style="height:50px" type="button">Pause Audio</button>   -->
+
+ <script>
+  var x = document.getElementById("myAudio"); 
+  
+  function playAudio() { 
+      x.play(); 
+  } 
+  function pauseAudio() { 
+      x.pause(); 
+  } 
+ 
+  </script>
+  
   <div class="chat__main">
+    <div class="pojemnikVideo"> 
+
+      <div id="my-camera" class="myCamera">
+        <div>
+          
+          <video id="cam" autoplay style="height:150px" muted="muted"></video>
+          <div style="height:45px; height: 45px;z-index: 2; margin-top: -42px; margin-left: 125px; position: absolute;">
+              <img onclick="wycisz()" id="mikrofon" style="height:35px" src="/img/microON.jpg" >
+              <img onclick="wylaczVideo()" id="camera" style="height:35px" src="/img/cameraON.png" >       
+          </div> 
+                <div id="jakSieNazwywam" style="height:20px; font-size:20px; z-index:2;"></div>           
+        </div>
+        
+        <div id="bazavideo">
+            <div id="box" style="background: rgb(156, 166, 201); margin-left:5px;margin-right:5px; height:150px; font-size: 18px;padding:40px 30px; text-align: center;">
+                TU PRZECIĄGNIJ PLIK KTÓRY CHCESZ WYSŁAĆ DO WYBRANYCH UŻYTKOWNIKÓW
+              </div>
+        </div>
+         
+          </div>
+             <h4>Moje ID: <span id="id" name="peerIdt"></span></h4>
+              <h4>Moje SID: <span id="idsocket" name="socketIdt"></span></h4>
+             <!-- <input type="text" name="peer_id"  id="peer_id" placeholder="Peer ID">
+          <button id="call">Call</button> -->
+
+      </div>
+      <div class="oknoPolaczenC" id="oknoPolaczenID">
+        <div id="actions">
+         
+          <!-- Podłączanie użytkownicy: <input type="text" id="rid" placeholder="Id z którym chcesz się połączyć"><input class="button" type="button" value="Połącz" id="connect"><br><br> -->
+      
+          <form id="send">
+            <input type="text" id="text" placeholder="Wpisz wiadomość"><input class="button" type="submit" value="Wyślij do wybranych użytkowników">
+          </form>
+          <button id="close">Zamknij wybrane połączenie</button>
+        </div>
+      
+        <div id="wrap"><div id="connections"><span class="filler">Brak aktywnych połączeń</span></div>
+          <div class="clear"></div></div>
+      
+        <!-- <div id="box" style="background: #fff; font-size: 18px;padding:40px 30px; text-align: center;">
+          TU PRZECIĄGNIJ PLIK KTÓRY CHCESZ WYSŁAĆ DO ZAZNACZONYCH UŻYTKOWNIKÓW
+        </div> -->
+      </div>
+    
+  
+   
     <ol id="messages" class="chat__messages"></ol>
 
     <div class="chat__footer">
       <form id="message-form">
-        <input name="message" type="text" placeholder="Message" autofocus autocomplete="off"/>
-        <button>Send</button>
+        <input name="message" type="text" placeholder="Wpisz wiadomość" autofocus autocomplete="off"/>
+        <button>Wyślij</button>
       </form>
-      <button id="send-location">Send location</button>
+      <button id="send-location">Wyślij położenie</button>
     </div>
   </div>
 
@@ -48,18 +152,21 @@
       </div>
       <div class="message__body">
         <p>
-          <a href="{{url}}" target="_blank">My current location</a>
+          <a href="{{url}}" target="_blank">Moje obecne położenie</a>
         </p>
       </div>
     </li>
   </script>
 
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/js/libs/jquery-3.1.0.min.js"></script>
   <script src="/js/libs/moment.js"></script>
   <script src="/js/libs/mustache.js"></script>
   <script src="/js/libs/deparam.js"></script>
   <script src="/js/chat.js"></script>
+  
+  <script>
+
+</script>
 </body>
 
 </html>

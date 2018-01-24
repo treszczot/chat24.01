@@ -15,7 +15,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "handlebars": "^4.0.10",
     "moment": "^2.15.1",
+    "peer": "^0.2.8",
+    "peerjs": "^0.3.14",
+    "picnic": "^6.4.0",
     "socket.io": "^1.4.8"
   },
   "devDependencies": {

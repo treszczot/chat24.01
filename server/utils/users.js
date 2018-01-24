@@ -1,8 +1,8 @@
-[{
-  id: '/#12poiajdspfoif',
-  name: 'Andrew',
-  room: 'The Office Fans'
-}]
+// [{
+//   id: '/#12poiajdspfoif',
+//   name: 'Andrew',
+//   room: 'The Office Fans'
+// }]
 
 // addUser(id, name, room)
 // removeUser(id)
@@ -13,8 +13,8 @@ class Users {
   constructor () {
     this.users = [];
   }
-  addUser (id, name, room) {
-    var user = {id, name, room};
+  addUser (id, name, room,ip, peerId) {
+    var user = {id, name, room, ip, peerId};
     this.users.push(user);
     return user;
   }
@@ -32,7 +32,11 @@ class Users {
   }
   getUserList (room) {
     var users = this.users.filter((user) => user.room === room);
-    var namesArray = users.map((user) => user.name);
+    // wybiera tylko uzytkownikó z tego konkretnego pokoju
+
+    var namesArray = users.map((user) => user.name+"$$"+user.id
+                   +"$$"+user.peerId);
+    
 
     return namesArray;
   }

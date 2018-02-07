@@ -156,11 +156,11 @@ function connect(c) {
     var batonZmiany =  $('<button id="zmiana'+c.peer+'" onclick="zakoncz(id)" type="button">Powieksz</button>').addClass('batonZmiany');
     var divNaVideo = $('<div></div>').addClass('divNavideo');
     
-    var oknoVideo = $('<video id="video'+c.peer+'" autoplay></video>').addClass('oknoVideoDynamic');
+    var oknoVideo = $('<video id="video'+c.peer+'" autoplay></video>').addClass('oknoVideoDynamic2');
     chatbox.append(header);
     
     divNaVideo.append(oknoVideo);
-    divNaVideo.append(batonZmiany);     
+    // divNaVideo.append(batonZmiany);     
     chatbox.append(divNaVideo);
     
     divNaBatony.append(batonVideo);
@@ -323,7 +323,19 @@ $(document).ready(function() {
     $('#text').val('');
     $('#text').focus();
   });
-
+ // videoconferency switch
+ $('#videkonferency_plus').click(function() {
+ 
+  var getted_widht = $(".connection").width();
+  //alert(getted_widht);
+  $(".connection").width(getted_widht+40);
+  // $(".content").css('width',560);
+});
+$('#videkonferency_minus').click(function() {
+  var getted_widht = $(".connection").width();
+  //alert(getted_widht);
+  $(".connection").width(getted_widht-40);
+ });
   // Goes through each active peer and calls FN on its connections.
   function eachActiveConnection(fn) {
     var actives = $('.active');

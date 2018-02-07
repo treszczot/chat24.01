@@ -128,9 +128,9 @@
   }
   
   .chat__messages {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    /* -webkit-overflow-scrolling: touch; */
   }
   
   .chat__footer {
@@ -157,6 +157,7 @@
   }
   
   .chat__messages {
+    overflow-y: scroll;
     list-style-type: none;
     padding: 10px;
   }
@@ -275,7 +276,7 @@
     background: rgb(223, 229, 248);
     height: 350px;
   }
-  .oknoVideoDynamic{
+  .oknoVideoDynamic1{
     width: 289px;
     height: 210px;
     margin-left: -20px;
@@ -283,6 +284,32 @@
     background-color: rgb(216, 210, 210);
     position: relative; 
   }
+
+  .oknoVideoDynamic2{
+    /* object-fit: fill; */
+   
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(216, 210, 210);
+    position: relative; 
+  }
+
+
+
+.messages{
+  
+  background: rgb(206, 206, 245);
+  max-height: 100px;
+  
+  overflow: scroll;
+  position: relative;
+  z-index: 0;
+
+
+}
+
   .nazwaZkim{
     position: absolute;
     padding: 2px;
@@ -293,25 +320,27 @@
     color: black;
   }
   .divNavideo{
-    width: 289px;
-    height: 210px;
-    margin-left: -20px;
-    margin-top: -11px;
-    position: relative;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+   
   } .divNaBatony{
     margin-top: -35px;
     position: relative;
     z-index: 5;
   }
   .batonPolaczVideo{
-    width: 70px;
-    margin-left: -10px;
+    width: 60px;
+    margin-left: 1px;
+    margin-bottom: 2px;
     background: #e4e1e12b;
 
   }
   .batonRozlaczVideo{
-    width: 70px;    
+    width: 70px; 
+    margin-left: 1px;
+    margin-bottom: 2px;   
     background: #ff00002b; 
   }
   .batonZmiany{

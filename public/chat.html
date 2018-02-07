@@ -56,6 +56,17 @@
   <div class="chat__sidebar">
     <h3>Podłączeni Użytkownicy</h3>
     <div id="users"></div>
+    <div>
+      <ol id="messages" class="chat__messages"></ol>
+
+      <div class="chat__footer">
+        <form id="message-form">
+          <input name="message" type="text" placeholder="Wpisz wiadomość" autofocus autocomplete="off"/>
+          <button>Wyślij</button>
+        </form>
+        <button id="send-location">Wyślij położenie</button>
+      </div>
+    </div>
   </div>
 
   <!-- <button onclick="playAudio()" style="height:50px" type="button">Play Audio</button>
@@ -109,6 +120,8 @@
             <input type="text" id="text" placeholder="Wpisz wiadomość"><input class="button" type="submit" value="Wyślij do wybranych użytkowników">
           </form>
           <button id="close">Zamknij wybrane połączenie</button>
+          <button id="videkonferency_plus" style="background-color:rgb(22, 22, 238); width: 40px">+</button>
+          <button id="videkonferency_minus" style="background-color:rgb(22, 22, 238); width: 40px">-</button>
         </div>
       
         <div id="wrap"><div id="connections"><span class="filler">Brak aktywnych połączeń</span></div>
@@ -120,17 +133,9 @@
       </div>
     
   
+     
+   </div>
    
-    <ol id="messages" class="chat__messages"></ol>
-
-    <div class="chat__footer">
-      <form id="message-form">
-        <input name="message" type="text" placeholder="Wpisz wiadomość" autofocus autocomplete="off"/>
-        <button>Wyślij</button>
-      </form>
-      <button id="send-location">Wyślij położenie</button>
-    </div>
-  </div>
 
   <script id="message-template" type="text/template">
     <li class="message">
